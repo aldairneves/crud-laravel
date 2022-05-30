@@ -2,6 +2,7 @@
 
 <!--Deu certo-->
 
+
 @section('content')
     <h1 class="text-center">Cadastrar</h1> <hr>
 
