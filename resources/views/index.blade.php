@@ -21,7 +21,7 @@
             </tr>
             </thead>
             <tbody>
-
+                
             @foreach ($book as $books)
                 @php
                     $user=$books->find($books->id)->relUsers;
