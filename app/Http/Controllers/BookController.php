@@ -12,7 +12,7 @@ class BookController extends Controller
     public function index()
     {
         $book=ModelBook::all();
-        return view('index',compact('book'));
+        return view('index',['book' => $book]);
     }
 
     public function create()
@@ -23,13 +23,13 @@ class BookController extends Controller
 
     public function store(BookRequest $request)
     {
-        $reg=ModelBook::create([
+        $cad=ModelBook::create([
             'title'=>$request->title,
             'pages'=>$request->pages,
             'price'=>$request->price,
             'id_user'=>$request->id_user
         ]);
-        if($reg){
+        if($cad){
             return redirect('books');
         }
 
@@ -38,7 +38,7 @@ class BookController extends Controller
     public function show($id)
     {
         $book=ModelBook::find($id);
-        return view('show',compact('book'));
+        return view('show',['book' => $book]);
     }
 
     public function edit($id)
