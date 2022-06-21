@@ -1,7 +1,7 @@
 @extends('template.tema')
 
 @section('content')
-    <h1 class="text-center">Visualizar</h1> <hr>
+    <h1 class="text-center">Visualizar</h1> 
 
     <div class="col-8 m-auto">
         @php

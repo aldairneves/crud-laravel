@@ -12,56 +12,47 @@ class BookController extends Controller
     public function index()
     {
         $book=ModelBook::all();
-        return view('index',['book' => $book]);
+        // dd ($book);
+        return view('book.index',['book' => $book]);
     }
 
     public function create()
     {
-        $users=User::all();
-        return view('create',compact('users'));
+        return view('book.create');
     }
-
-    public function store(BookRequest $request)
+    public function store(Request $request)
     {
-        $cad=ModelBook::create([
-            'title'=>$request->title,
-            'pages'=>$request->pages,
-            'price'=>$request->price,
-            'id_user'=>$request->id_user
-        ]);
-        if($cad){
-            return redirect('books');
-        }
-
+        ModelBook::create($request->all());
+        return redirect()->route('book-index');
     }
-
-    public function show($id)
-    {
-        $book=ModelBook::find($id);
-        return view('show',['book' => $book]);
-    }
-
     public function edit($id)
     {
-        $book=ModelBook::find($id);
-        $users=User::all();
-        return view('create',compact('book','users'));
+        $book = ModelBook::where('id',$id)->first();
+        if(!empty($book))
+        {
+            return view('book.edit', ['book'=>$book]);
+        }
+        else
+        {
+            return redirect()->route('book-index');
+        }
     }
-
     public function update(Request $request, $id)
     {
-        ModelBook::where(['id'=>$id])->update([
-            'title'=>$request->title,
-            'pages'=>$request->pages,
-            'price'=>$request->price,
-            'id_user'=>$request->id_user
-        ]);
-        return redirect('books');
-    }
-
-    public function destroy($id)
-    {
-        $del=ModelBook::destroy($id);
-        return($del)?"sim":"não";
-    }
+        // dd($id);
+        $data = [
+            'title' => $request->title,
+            'id_user' => $request->id_user,
+            'pages' => $request->pages,
+            'price' => $request->price,
+        ];
+        ModelBook::where('id', $id)->update($data);
+        return redirect()->route('book-index');
 }
+    public function destroy($id)
+
+      {
+        ModelBook::where('id', $id)->delete();
+         return redirect()->route('book-index');
+      }
+ }
