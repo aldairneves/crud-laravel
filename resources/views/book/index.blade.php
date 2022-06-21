@@ -10,7 +10,6 @@
             <a href="{{ route('book-create') }}" class="btn btn-success">NOVO</a>
         </div>
         </div>
-   
 
     <div class="col-8 m-auto">
     <table class="table table-dark table-hover">
